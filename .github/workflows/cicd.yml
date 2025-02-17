@@ -15,4 +15,5 @@ jobs:
       packages: write
       id-token: write
   trigger-deployment:
+    needs: [build-push-image]
     uses: gb-beng/gha-workflows/.github/workflows/trigger-deployment.yml@add-trigger-deployment
