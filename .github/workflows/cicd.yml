@@ -8,11 +8,18 @@ on:
 
 jobs:
   build-push-image:
-    uses: beeldengeluid/gha-workflows/.github/workflows/build-push-image.yml@0906ce330782828250bb81ab0f94b4523d11eeda # v2025.01.30
+    uses: gb-beng/gha-workflows/.github/workflows/build-push-image.yml@main
     secrets: inherit
     permissions:
       contents: read
       packages: write
       id-token: write
-  trigger-deployment:
-    uses: gb-beng/gha-workflows/.github/workflows/trigger-deployment.yml@add-trigger-deployment
+  integration-tests:
+    needs: [build-push-image]
+    uses: gb-beng/gha-workflows/.github/workflows/trigger-integration-tests.yml@main
+    with:
+      image: ${{ needs.build-push-image.outputs.oci }}
+      workload: beng-lod-server # could be repo/...
+  deploy:
+    needs: [integration-tests]
+    uses: gb-beng/gha-workflows/.github/workflows/trigger-deploy.yml@main
