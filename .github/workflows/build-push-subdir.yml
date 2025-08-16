@@ -1,0 +1,20 @@
+on:
+  push:
+    branches:
+    - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-push-image:
+    uses: beeldengeluid/gha-workflows/.github/workflows/build-push-image.yml@subdirectory-support
+    with:
+      subdirectory: subapp
+    secrets: inherit
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
