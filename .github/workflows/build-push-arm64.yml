@@ -10,10 +10,13 @@ concurrency:
 
 jobs:
   build-push-image:
-    uses: beeldengeluid/gha-workflows/.github/workflows/build-push-image.yml@arm-build
+    uses: beeldengeluid/gha-workflows/.github/workflows/build-push-image.yml@runner-as-input
+    with:
+      runner: ubuntu-24.04-arm
     secrets: inherit
     permissions:
       contents: read
       packages: write
       id-token: write
+
 
