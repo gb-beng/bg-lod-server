@@ -10,11 +10,10 @@ concurrency:
 
 jobs:
   build-push-image:
-    uses: beeldengeluid/gha-workflows/.github/workflows/build-push-image.yml@subdirectory-support
-    with:
-      subdirectory: subapp
+    uses: beeldengeluid/gha-workflows/.github/workflows/build-push-image.yml@arm-build
     secrets: inherit
     permissions:
       contents: read
       packages: write
       id-token: write
+
