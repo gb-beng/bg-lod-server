@@ -12,8 +12,6 @@ jobs:
   build-push-image:
     uses: beeldengeluid/gha-workflows/.github/workflows/build-push-image.yml@arm-build
     secrets: inherit
-    with:
-      arm64: true
     permissions:
       contents: read
       packages: write
